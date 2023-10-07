@@ -24,6 +24,7 @@
 use std::path::{Path, PathBuf};
 use std::time::Duration;
 use tui_realm_stdlib::{Input, Phantom};
+use tuirealm::event::KeyEventKind;
 use tuirealm::{
     application::PollStrategy,
     command::{Cmd, CmdResult, Direction, Position},
@@ -94,6 +95,7 @@ impl Model {
                     SubEventClause::Keyboard(KeyEvent {
                         code: Key::Esc,
                         modifiers: KeyModifiers::NONE,
+                kind: KeyEventKind::Press
                     }),
                     SubClause::Always
                 )]
@@ -291,46 +293,57 @@ impl Component<Msg, NoUserEvent> for FsTree {
             Event::Keyboard(KeyEvent {
                 code: Key::Left,
                 modifiers: KeyModifiers::NONE,
+                kind: KeyEventKind::Press
             }) => self.perform(Cmd::Custom(TREE_CMD_CLOSE)),
             Event::Keyboard(KeyEvent {
                 code: Key::Right,
                 modifiers: KeyModifiers::NONE,
+                kind: KeyEventKind::Press
             }) => self.perform(Cmd::Custom(TREE_CMD_OPEN)),
             Event::Keyboard(KeyEvent {
                 code: Key::PageDown,
                 modifiers: KeyModifiers::NONE,
+                kind: KeyEventKind::Press
             }) => self.perform(Cmd::Scroll(Direction::Down)),
             Event::Keyboard(KeyEvent {
                 code: Key::PageUp,
                 modifiers: KeyModifiers::NONE,
+                kind: KeyEventKind::Press
             }) => self.perform(Cmd::Scroll(Direction::Up)),
             Event::Keyboard(KeyEvent {
                 code: Key::Down,
                 modifiers: KeyModifiers::NONE,
+                kind: KeyEventKind::Press
             }) => self.perform(Cmd::Move(Direction::Down)),
             Event::Keyboard(KeyEvent {
                 code: Key::Up,
                 modifiers: KeyModifiers::NONE,
+                kind: KeyEventKind::Press
             }) => self.perform(Cmd::Move(Direction::Up)),
             Event::Keyboard(KeyEvent {
                 code: Key::Home,
                 modifiers: KeyModifiers::NONE,
+                kind: KeyEventKind::Press
             }) => self.perform(Cmd::GoTo(Position::Begin)),
             Event::Keyboard(KeyEvent {
                 code: Key::End,
                 modifiers: KeyModifiers::NONE,
+                kind: KeyEventKind::Press
             }) => self.perform(Cmd::GoTo(Position::End)),
             Event::Keyboard(KeyEvent {
                 code: Key::Enter,
                 modifiers: KeyModifiers::NONE,
+                kind: KeyEventKind::Press
             }) => self.perform(Cmd::Submit),
             Event::Keyboard(KeyEvent {
                 code: Key::Backspace,
                 modifiers: KeyModifiers::NONE,
+                kind: KeyEventKind::Press
             }) => return Some(Msg::GoToUpperDir),
             Event::Keyboard(KeyEvent {
                 code: Key::Tab,
                 modifiers: KeyModifiers::NONE,
+                kind: KeyEventKind::Press
             }) => return Some(Msg::FsTreeBlur),
             _ => return None,
         };
@@ -354,6 +367,7 @@ impl Component<Msg, NoUserEvent> for GlobalListener {
             Event::Keyboard(KeyEvent {
                 code: Key::Esc,
                 modifiers: KeyModifiers::NONE,
+                kind: KeyEventKind::Press
             }) => Some(Msg::AppClose),
             _ => None,
         }
@@ -393,6 +407,7 @@ impl Component<Msg, NoUserEvent> for GoTo {
             Event::Keyboard(KeyEvent {
                 code: Key::Enter,
                 modifiers: KeyModifiers::NONE,
+                kind: KeyEventKind::Press
             }) => {
                 let res = self.perform(Cmd::Submit);
                 // Clear value
@@ -402,34 +417,42 @@ impl Component<Msg, NoUserEvent> for GoTo {
             Event::Keyboard(KeyEvent {
                 code: Key::Char(ch),
                 modifiers: KeyModifiers::NONE,
+                kind: KeyEventKind::Press
             }) => self.perform(Cmd::Type(ch)),
             Event::Keyboard(KeyEvent {
                 code: Key::Left,
                 modifiers: KeyModifiers::NONE,
+                kind: KeyEventKind::Press
             }) => self.perform(Cmd::Move(Direction::Left)),
             Event::Keyboard(KeyEvent {
                 code: Key::Right,
                 modifiers: KeyModifiers::NONE,
+                kind: KeyEventKind::Press
             }) => self.perform(Cmd::Move(Direction::Right)),
             Event::Keyboard(KeyEvent {
                 code: Key::Home,
                 modifiers: KeyModifiers::NONE,
+                kind: KeyEventKind::Press
             }) => self.perform(Cmd::GoTo(Position::Begin)),
             Event::Keyboard(KeyEvent {
                 code: Key::End,
                 modifiers: KeyModifiers::NONE,
+                kind: KeyEventKind::Press
             }) => self.perform(Cmd::GoTo(Position::End)),
             Event::Keyboard(KeyEvent {
                 code: Key::Delete,
                 modifiers: KeyModifiers::NONE,
+                kind: KeyEventKind::Press
             }) => self.perform(Cmd::Cancel),
             Event::Keyboard(KeyEvent {
                 code: Key::Backspace,
                 modifiers: KeyModifiers::NONE,
+                kind: KeyEventKind::Press
             }) => self.perform(Cmd::Delete),
             Event::Keyboard(KeyEvent {
                 code: Key::Tab,
                 modifiers: KeyModifiers::NONE,
+                kind: KeyEventKind::Press
             }) => return Some(Msg::GoToBlur),
             _ => return None,
         };

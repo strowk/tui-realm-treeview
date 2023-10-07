@@ -443,6 +443,10 @@ impl TreeView {
         &self.states
     }
 
+    pub fn tree_state_mut(&mut self) -> &mut TreeState {
+        &mut self.states
+    }
+
     // -- private
 
     /// ### changed

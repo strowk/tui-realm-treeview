@@ -231,7 +231,7 @@ impl TreeState {
     /// Open provided node
     /// Node is opened only if is NOT a leaf and it is closed.
     /// It will also open all the ancestors for `node`
-    fn open_node(&mut self, root: &Node, node: &Node) {
+    pub fn open_node(&mut self, root: &Node, node: &Node) {
         if !node.is_leaf() && self.is_closed(node) {
             self.open.push(node.id().to_string());
         }
